@@ -1,27 +1,26 @@
 <template>
-  <div class="home">
-    <h2> Current Collectors </h2> 
-  <div v-for="collector in collectors" class="card" style="width: 18rem;">
-      <img v-bind:src="collector.img_url" class="card-img-top" alt="Card image cap">
-      <div class="card-body">
-        <p class="card-text"> {{ collector.name }}
-          {{ collector.age }} </p>
-        <p class="card-text"> {{ collector.email }} </p> 
-      </div>
-  </div>
-
-    <div v-for="collector in collectors">  
-      <button type="button" class="btn btn-primary">  {{ collector.name }} </button> 
-    </div> 
-
-    
-  
+  <div class="watches-index">
+    <h2> All Watches </h2> 
+    <div v-for="watch in watches" class="card" style="width: 18rem;">
+        <img v-bind:src="watch.img_url" class="card-img-top" alt="Card image cap">
+        <div class="card-body">
+          <p class="card-text">
+            {{ watch.brand }} </p>
+            {{ watch.model }}
+        </div>
+    </div>
   </div>
 </template>
 <style>
 img {
   max-width: 200px;
   max-height: 200px;
+  padding: 2rem;
+}
+
+.card {
+  display: inline-block;
+  padding-right: 2rem;
 }
 </style>
 <script>
