@@ -7,10 +7,35 @@
         <p class="card-text"> {{ collector.name }}
           {{ collector.age }} </p>
         <p class="card-text"> {{ collector.email }} </p> 
+        <div v-for="watch in collector.watches" class="card-text"> 
+           <p>  
+             {{ watch.brand }}
+             {{ watch.model }} 
+          </p> 
+        </div> 
+        <button v-on:click="viewCollector(collector)"> View More </button> 
       </div>
+    <dialog id="collector-details"> 
+      <form method="dialog"> 
+        <h1> Collector Information </h1> 
+        <p> {{ currentCollector.name }} </p> 
+        <p> {{ currentCollector.email }} </p> 
+        <p> {{ currentCollector.age }} </p>
+        <h2>  Edit Collector Information </h2>
+        Name: 
+        <input type="text" v-model="currentCollector.name" />  
+        Age: 
+        <input type="text" v-model="currentCollector.age" /> 
+        Email: 
+        <input type="text" v-model="currentCollector.email" />   
+        Image: 
+        <input type="text" v-model="currentCollector.img_url" />
+        <button v-on:click="editCollector()"> Update Collector </button>   
+        <button> Close </button> 
+      </form> 
+    </dialog> 
     </div>
          <h3> Know a Collector? Add one!! </h3> 
-
          <div> 
             Name: 
             <input type="text" v-model="newCollectorParams.name" /> 
@@ -40,6 +65,8 @@ export default {
       watches: [],
       collectors: [],
       newCollectorParams: {},
+      currentCollector: {},
+      editCollectorParams: {},
     };
   },
   created: function () {
@@ -69,6 +96,22 @@ export default {
         })
         .catch((error) => {
           console.log("new collector error", error.response);
+        });
+    },
+    viewCollector: function (collector) {
+      this.currentCollector = collector;
+      document.querySelector("#collector-details").showModal();
+    },
+    editCollector: function (collector) {
+      var editCollectorParams = collector;
+      axios
+        .patch("/collectors/" + collector.id, editCollectorParams)
+        .then((response) => {
+          console.log("edit Collector", response);
+          this.currentCollector = {};
+        })
+        .catch((error) => {
+          console.log("update Collector error", error.response);
         });
     },
   },
