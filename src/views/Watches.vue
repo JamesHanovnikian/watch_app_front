@@ -10,6 +10,7 @@
             {{ watch.brand }} </p>
             {{ watch.model }}
         </div>
+        <button v-on:click="deleteWatch(watch)"> Remove Watch </button> 
     </div>
 
     <h3> Is your watch not featured? Add one here </h3> 
@@ -78,6 +79,13 @@ export default {
         .catch((error) => {
           console.log("watches error", error.response);
         });
+    },
+    deleteWatch: function (watch) {
+      axios.delete("/watches/" + watch.id).then((response) => {
+        console.log("deleted this watch", response);
+        var index = this.watches.indexOf(watch);
+        this.watches.splice(index, 1);
+      });
     },
   },
 };
