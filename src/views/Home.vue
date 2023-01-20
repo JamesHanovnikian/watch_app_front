@@ -14,6 +14,7 @@
           </p> 
         </div> 
         <button v-on:click="viewCollector(collector)"> View More </button> 
+        <button v-on:click="deleteCollector(collector)"> Remove Collector </button> 
       </div>
     <dialog id="collector-details"> 
       <form method="dialog"> 
@@ -30,6 +31,7 @@
         <input type="text" v-model="currentCollector.email" />   
         Image: 
         <input type="text" v-model="currentCollector.img_url" />
+        {{ currentCollector.watches }}
         <button v-on:click="editCollector()"> Update Collector </button>   
         <button> Close </button> 
       </form> 
@@ -113,6 +115,13 @@ export default {
         .catch((error) => {
           console.log("update Collector error", error.response);
         });
+    },
+    deleteCollector: function (collector) {
+      axios.delete("/collectors/" + collector.id).then((response) => {
+        console.log("destroy the collector!!!", response);
+        var index = this.collectors.indexOf(collector);
+        this.collectors.splice(index, 1);
+      });
     },
   },
 };
