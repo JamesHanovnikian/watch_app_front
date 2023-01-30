@@ -1,37 +1,44 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/watches"> Watches </router-link>
-    </div>
-
-    <h2> The Watch App </h2>
-
-    
+    <nav id="nav" class="navbar navbar-light bg-light">
+      <a class="navbar-brand" href="#"> WatchCollectors</a>
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="#"> Collectors</a>
+          <a class="nav-item nav-link" href="#">All Watches </a>
+          <a class="nav-item nav-link" href="#"> About </a>
+        </div>
+    </nav>
     <router-view/>
-  </div>
+  </div> 
 </template>
 
 <style>
+#nav {
+  display: flex;
+  align-items: center;
+}
+
+#nav .navbar-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 25px;
+  margin-left: auto;
+}
+
+#nav .navbar-brand {
+  margin: 1.5rem;
+}
+
+#nav .nav-item {
+  padding: 15px;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+  color: #424446;
 }
 </style>

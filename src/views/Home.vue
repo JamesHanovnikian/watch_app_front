@@ -4,38 +4,40 @@
     <div v-for="collector in collectors" class="card" style="width: 18rem;">
       <img v-bind:src="collector.img_url" class="card-img-top" alt="Card image cap">
       <div class="card-body">
+  
         <p class="card-text"> {{ collector.name }}
           {{ collector.age }} </p>
         <p class="card-text"> {{ collector.email }} </p> 
-        <div v-for="watch in collector.watches" class="card-text"> 
-           <p>  
-             {{ watch.brand }}
-             {{ watch.model }} 
-          </p> 
-        </div> 
+        <!-- <div v-for="watch in collector.watches" class="card-text"> 
+           {{ watch.category }}
+        </div>  -->
+  
         <button v-on:click="viewCollector(collector)"> View More </button> 
         <button v-on:click="deleteCollector(collector)"> Remove Collector </button> 
       </div>
-    <dialog id="collector-details"> 
-      <form method="dialog"> 
-        <h1> Collector Information </h1> 
-        <p> {{ currentCollector.name }} </p> 
-        <p> {{ currentCollector.email }} </p> 
-        <p> {{ currentCollector.age }} </p>
-        <h2>  Edit Collector Information </h2>
-        Name: 
-        <input type="text" v-model="currentCollector.name" />  
-        Age: 
-        <input type="text" v-model="currentCollector.age" /> 
-        Email: 
-        <input type="text" v-model="currentCollector.email" />   
-        Image: 
-        <input type="text" v-model="currentCollector.img_url" />
-        {{ currentCollector.watches }}
-        <button v-on:click="editCollector()"> Update Collector </button>   
-        <button> Close </button> 
-      </form> 
-    </dialog> 
+    
+      <dialog id="collector-details"> 
+        <form method="dialog"> 
+          <h1> Collector Information </h1> 
+          <p> {{ currentCollector.name }} </p> 
+          <p> {{ currentCollector.email }} </p> 
+          <p> {{ currentCollector.age }} </p>
+          <h2>  Edit Collector Information </h2>
+          Name: 
+          <input type="text" v-model="currentCollector.name" />  
+          Age: 
+          <input type="text" v-model="currentCollector.age" /> 
+          Email: 
+          <input type="text" v-model="currentCollector.email" />   
+          Image: 
+          <input type="text" v-model="currentCollector.img_url" />
+          <div v-for="watch in currentCollector.watches"> 
+              <p>  {{ watch }} </p> 
+          </div> 
+          <button v-on:click="editCollector()"> Update Collector </button>   
+          <button> Close </button> 
+        </form> 
+      </dialog> 
     </div>
          <h3> Know a Collector? Add one!! </h3> 
          <div> 
@@ -55,8 +57,8 @@
 </template>
 <style>
 img {
-  max-width: 200px;
-  max-height: 200px;
+  max-width: 100px;
+  max-height: 100px;
 }
 </style>
 <script>
